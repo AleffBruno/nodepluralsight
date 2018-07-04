@@ -1,0 +1,2 @@
+body-parser
+app.use(express.static('client'));
