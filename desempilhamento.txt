@@ -1,2 +1,6 @@
+documentação br : http://expressjs.com/pt-br/
+
+slides do curso : http://fem-node-api.netlify.com/
+
 body-parser
 app.use(express.static('client'));
