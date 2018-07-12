@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('lodash');
 
 lionsRouter = express.Router();
 

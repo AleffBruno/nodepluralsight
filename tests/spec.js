@@ -1,6 +1,6 @@
 var app = require('./server');
 var request = require('supertest');
-var chai = require('chai').expect;
+var expect = require('chai').expect;
 
 describe('[LIONS]',function(){
 
@@ -8,12 +8,12 @@ describe('[LIONS]',function(){
         request(app)
         .get('/lions')
         .set('Accept','application/json')
-        .expect('Content-Type','application/json')
+        .expect('Content-Type',/json/)
         .expect(200)
         .end(function(err,resp){
-            chai(resp.body).to.be.an('array');
+            expect(resp.body).to.be.an('array');
             done();
-        })
+        });
     });
 
     it('should create a lion',function(done){
@@ -21,12 +21,12 @@ describe('[LIONS]',function(){
         .post('/lions')
         .send({name:'simba'})
         .set('Accept','application/json')
-        .expect('Content-Type','application/json')
+        .expect('Content-Type',/json/)
         .expect(201)
         .end(function(err,resp){
-            chai(resp.body).to.be.an('object');
+            expect(resp.body).to.be.an('object');
             done();
-        })
+        });
     });
 
     it('should delete a lion',function(done){
@@ -39,7 +39,7 @@ describe('[LIONS]',function(){
             request(app)
             .delete('/lions/'+lion.id)
             .end(function(err,resp){
-                chai(resp.body).to.eql(lion);
+                expect(resp.body).to.eql(lion);
                 done();
             });
         });

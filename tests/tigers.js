@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('lodash');
 
 tigersRouter = express.Router();
 
