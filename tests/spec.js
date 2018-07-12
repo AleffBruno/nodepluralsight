@@ -4,6 +4,10 @@ var expect = require('chai').expect;
 
 describe('[LIONS]',function(){
 
+    beforeEach(function(){
+        console.log("Testing...");
+    });
+
     it('should get all errors',function(done){
         request(app)
         .get('/lions')
@@ -45,6 +49,26 @@ describe('[LIONS]',function(){
         });
     });
 
+    it('should update a lion',function(done){
+        request(app)
+        .post('/lions')
+        .send({name:'simba'})
+        .set('Accept','application/json')
+        .expect(200)
+        .expect('Content-Type',/lion/)
+        .end(function(err,resp){
+            var createdLion = resp.body;
+            request(app)
+            .put('/lions/'+createdLion.id)
+            .send({name:'simbaUpdated'})
+            .set('Accept','application/json')
+            .expect(200)
+            .end(function(err,resp){
+                expect(resp.body.name).to.equal('simbaUpdated');
+                done();
+            })
+        });
+    });
 
 });
 
